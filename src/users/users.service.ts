@@ -27,9 +27,14 @@ export class UsersService {
   findWithEmail(email: string) {
     return this.userRepo.find({ email: email });
   }
-
-  findOne(id: number) {
-    return this.userRepo.findOne(id);
+  find_(id: number) {
+    return this.userRepo.find({ id: id });
+  }
+  async findOne_(id: number) {
+    if (!id) {
+      return null;
+    }
+    return await this.userRepo.findOne(id);
   }
 
   async update(id: number, data: Partial<UserEntity>) {

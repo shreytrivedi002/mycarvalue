@@ -1,14 +1,16 @@
 import {
+  BadRequestException,
   Body,
-  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
   Param,
   Patch,
   Post,
+  Request,
+  Session,
 } from '@nestjs/common';
-import { SerialiseInterceptImport } from 'src/interceptors/serialize.interceptor';
+import { SerialiseInterceptImport } from '../interceptors/serialize.interceptor';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersDto } from './dto/users.dto';
@@ -24,8 +26,10 @@ export class UsersController {
   ) {}
 
   @Post('/signup')
-  createUser(@Body() body: CreateUserDto) {
-    return this.authService.signup(body.email, body.password);
+  async createUser(@Body() body: CreateUserDto, @Session() session: any) {
+    const user = await this.authService.signup(body.email, body.password);
+    session.userId = user.id;
+    return user;
   }
 
   @Get('allUsers')
@@ -35,13 +39,11 @@ export class UsersController {
 
   @Get('/signup/:id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(parseInt(id));
+    return this.usersService.findOne_(parseInt(id));
   }
 
   @Patch('/signup/:id')
   update(@Param('id') id: string, @Body() body: Partial<UserEntity>) {
-    console.log(body);
-
     return this.usersService.update(parseInt(id), body);
   }
 
@@ -51,7 +53,16 @@ export class UsersController {
   }
 
   @Post('/signin')
-  AuthenticateUser(@Body() body: CreateUserDto) {
-    return this.authService.signin(body.email, body.password);
+  async AuthenticateUser(@Body() body: CreateUserDto, @Session() session: any) {
+    const [user] = await this.authService.signin(body.email, body.password);
+    session.userId = user.id;
+    return user;
+  }
+
+  @Get('/getRequestData')
+  async getReqData(@Request() request: any) {
+    // console.log(request.currentUser);
+
+    return request;
   }
 }
