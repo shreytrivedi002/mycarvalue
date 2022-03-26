@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable, Session } from '@nestjs/common';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
-import { CurrentUserInterceptor } from 'src/interceptors/current-user.interceptor';
 import { promisify } from 'util';
 import { UsersService } from './users.service';
 
@@ -9,10 +8,6 @@ const scrypt = promisify(_scrypt);
 @Injectable()
 export class AuthService {
   constructor(private userService: UsersService) {}
-
-  async signout(@Session() session: any) {
-    return (session.userId = null);
-  }
 
   async signup(email: string, password: string) {
     const user = await this.userService.findWithEmail(email);

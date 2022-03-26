@@ -34,7 +34,8 @@ export class UsersService {
     if (!id) {
       return null;
     }
-    return await this.userRepo.findOne(id);
+    const user = await this.userRepo.findOne(id);
+    return user;
   }
 
   async update(id: number, data: Partial<UserEntity>) {

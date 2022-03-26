@@ -1,0 +1,14 @@
+#create new report
+
+POST  http://localhost:3001/reports
+content-type: application/json
+
+{
+    "milege":20,
+    "make":"honda",
+    "model":"sona",
+    "year": 2020,
+    "lat": 0,
+    "lng": 0,
+    "price":297297
+}
