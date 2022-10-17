@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CurrentUserInterceptor } from '../interceptors/current-user.interceptor';
-import { UsersDto } from '../users/dto/users.dto';
+// import { UsersDto } from '../users/dto/users.dto';
 import { UserEntity } from '../users/user.entity';
-import { UsersModule } from '../users/users.module';
+// import { UsersModule } from '../users/users.module';
 import { UsersService } from '../users/users.service';
 import { ReportsController } from './reports.controller';
 import { ReportsEntity } from './reports.entity';

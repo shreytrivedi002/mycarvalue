@@ -12,8 +12,10 @@ export class ReportsService {
   ) {}
 
   async create(data: CreateReportsDto, user: any) {
+    console.log(data, user);
+
     const report = this.reportRepository.create(data);
     report.user = user;
-    return await this.reportRepository.save(report);
+    return this.reportRepository.save(report);
   }
 }

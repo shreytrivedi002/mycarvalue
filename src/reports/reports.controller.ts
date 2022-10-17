@@ -18,7 +18,7 @@ export class ReportsController {
 
   @UseGuards(AuthGuard)
   @Post('/')
-  async newReport(@Body() body: CreateReportsDto, @Request() req: any) {
-    return await this.reportsService.create(body, req.currentUser);
+  newReport(@Body() body: CreateReportsDto, @Request() req: any) {
+    return this.reportsService.create(body, req.currentUser);
   }
 }

@@ -1,9 +1,9 @@
 ##### create new user
-POST  http://localhost:3000/auth/signup
+POST  http://localhost:3001/auth/signup
 content-type: application/json
 
 {
-    "email": "abc@abcd.com",
+    "email": "abc@abcx.com",
     "password": "sample_password"
 }
 
@@ -21,11 +21,11 @@ GET   http://localhost:3001/auth/signout
 
 
 #### find all users
-GET http://localhost:3000/auth/allUsers
+GET http://localhost:3001/auth/allUsers
 
 
 #### find one use by id
-GET http://localhost:3000/auth/signup/2
+GET http://localhost:3001/auth/signup/2
 
 
 ############

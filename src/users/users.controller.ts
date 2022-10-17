@@ -9,11 +9,11 @@ import {
   Request,
   Session,
   UseGuards,
-  UseInterceptors,
+  // UseInterceptors,
 } from '@nestjs/common';
-import { request } from 'http';
+// import { request } from 'http';
 import { AuthGuard } from '../Auth.guard';
-import { CurrentUserInterceptor } from '../interceptors/current-user.interceptor';
+// import { CurrentUserInterceptor } from '../interceptors/current-user.interceptor';
 import { SerialiseInterceptImport } from '../interceptors/serialize.interceptor';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -23,7 +23,7 @@ import { UsersService } from './users.service';
 
 @Controller('auth')
 @SerialiseInterceptImport(UsersDto)
-@UseInterceptors(CurrentUserInterceptor)
+// @UseInterceptors(CurrentUserInterceptor)
 export class UsersController {
   constructor(
     private usersService: UsersService,
@@ -37,7 +37,7 @@ export class UsersController {
     return user;
   }
 
-  @Get('allUsers')
+  @Get('/allUsers')
   @UseGuards(AuthGuard)
   getUsers() {
     return this.usersService.getAllUsers();
